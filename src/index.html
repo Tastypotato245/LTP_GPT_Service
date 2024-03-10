@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LPT_GPT Chat</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+        }
+        .chat-container {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .quiz-question, .chat-input {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .quiz-question {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            padding: 15px;
+            box-sizing: border-box;
+            margin-bottom: 40px; /* 추가 간격을 제공 */
+        }
+        textarea.chat-input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            resize: vertical; /* 사용자가 세로 크기를 조정할 수 있도록 함 */
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <h1>LPT_GPT</h1>
+        <div class="quiz-question">
+           &nbsp; A child lives on the 10th floor of an apartment. On a sunny day, I get off the elevator on the 6th floor and walk up to the 10th floor. On a bad day, I get off the 10th floor and enter my house. Why is that?
+        </div>
+        <textarea id="userQuestion" class="chat-input" placeholder="Enter your question here..." rows="4"></textarea>
+        <button onclick="sendQuestion()">Submit</button>
+    </div>
+
+    <script>
+        function sendQuestion() {
+            var userQuestion = document.getElementById('userQuestion').value;
+            var data = JSON.stringify({"question": userQuestion});
+
+            fetch('/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: data,
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                alert(JSON.stringify(data, null, 2));
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
+
