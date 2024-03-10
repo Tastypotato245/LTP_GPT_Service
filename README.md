@@ -10,6 +10,13 @@ python3 app.py
 
 <img width="605" alt="image" src="https://github.com/Tastypotato245/LTP_GPT_Service/assets/63251068/cfca26a6-4793-4fb5-b20e-d23856715b31">
 
+## TODO
+- [ ] Validate that gpt never say hint about the quiz WHENEVER
+- [ ] Make Web page
+  - [ ] Make User Login (Google account)
+  - [ ] Attach google AdSense (Advertisement Banner in My Site)
+- [ ] Make Docker Image for servicing this web site for general users
+- [ ] Buy Domain Name
 
 ## Examples
 
