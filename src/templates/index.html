@@ -43,7 +43,32 @@ body {
 			padding:10px;
 			box-sizing: border-box;
 			margin-bottom:20px;
+			display: flex;
+			flex-direction: column;
 		}
+
+		.message {
+			padding: 10px;
+			border-radius: 10px;
+			margin: 5px 10px;
+			word-wrap: break-word;
+			max-width: 100%;
+		}
+
+		.user-message {
+			align-self: flex-end; /* User 메시지를 오른쪽으로 정렬 */
+			background-color: #28a745; /* 고급스러운 녹색 */
+		}
+
+		.gpt-message {
+			align-self: flex-start; /* GPT 메시지를 왼쪽으로 정렬 */
+			background-color: #007BFF; /* 고급스러운 파란색 */
+		}
+
+		.message-text {
+			color: white;
+		}
+
 		</style>
 	</head>
 	<body>
@@ -83,16 +108,17 @@ body {
 			function displayMessage(message, sender) {
 				const messageElement = document.createElement('div');
 				messageElement.textContent = message;
+				messageElement.classList.add('message', 'message-text');
+
 				if (sender === 'gpt') {
-					messageElement.style.textAlign = 'left';
-					messageElement.style.color = 'blue';
+					messageElement.classList.add('gpt-message');
 				} else {
-					messageElement.style.textAlign = 'right';
-					messageElement.style.color = 'green';
+					messageElement.classList.add('user-message');
 				}
-				document.getElementById('chatWindow').appendChild(messageElement);
+				const chatWindow = document.getElementById('chatWindow');
+				chatWindow.appendChild(messageElement);
+				messageElement.scrollIntoView({behavior: "smooth"}); // 새 메시지로 스크롤
 			}
 		</script>
 	</body>
 </html>
-
