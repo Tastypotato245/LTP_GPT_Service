@@ -10,6 +10,10 @@ python3 app.py
 
 <img width="605" alt="image" src="https://github.com/Tastypotato245/LTP_GPT_Service/assets/63251068/cfca26a6-4793-4fb5-b20e-d23856715b31">
 
+## Test page
+<img width="1193" alt="image" src="https://github.com/Tastypotato245/LTP_GPT_Service/assets/63251068/03a0983e-a99d-4aaf-b875-f2781356bd41">
+
+
 ## TODO
 - [ ] Validate that gpt never say hint about the quiz WHENEVER
 - [ ] Make Web page
