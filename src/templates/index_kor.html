@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>LPT_GPT Chat</title>
+		<style>
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	height: 100vh;
+}
+		.chat-container {
+			width: 50%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+		.quiz-question, .chat-input {
+			width: 100%;
+			margin-bottom: 20px;
+		}
+		.quiz-question {
+			background-color: #f0f0f0;
+			border: 1px solid #ccc;
+			padding: 15px;
+			box-sizing: border-box;
+			margin-bottom: 20px; /* 추가 간격을 제공 */
+		}
+		textarea.chat-input {
+			padding: 10px;
+			border: 1px solid #ccc;
+			box-sizing: border-box;
+			resize: vertical;
+		}
+		#chatWindow {
+			width:100%;
+			height:300px;
+			border:1px solid #ccc;
+			overflow-y: scroll;
+			padding:10px;
+			box-sizing: border-box;
+			margin-bottom:20px;
+			display: flex;
+			flex-direction: column;
+		}
+		.message {
+			padding: 10px;
+			border-radius: 10px;
+			margin: 5px 10px;
+			word-wrap: break-word;
+			word-break: break-all;
+			white-space: pre-wrap; /* Respect whitespace and wrap text */
+			overflow-wrap: break-word; /* Break the word to prevent overflow */
+			max-width: 50%;
+		}
+		.user-message {
+			align-self: flex-end; /* User 메시지를 오른쪽으로 정렬 */
+			background-color: #28a745; /* 고급스러운 녹색 */
+			margin-left: auto; /* Push to right */
+		}
+		.gpt-message {
+			align-self: flex-start; /* GPT 메시지를 왼쪽으로 정렬 */
+			background-color: #007BFF; /* 고급스러운 파란색 */
+			margin-right: auto; /* Push to right */
+
+		}
+		.message-text {
+			color: white;
+		}
+
+		.input-group {
+			display: flex;
+			width: 100%;
+		}
+
+		.chat-input {
+			flex-grow: 1;
+			border: 1px solid #ccc;
+			border-right: none; /* Remove right border where button meets input */
+			padding: 10px;
+			border-top-left-radius: 5px;
+			border-bottom-left-radius: 5px;
+			margin: 0; /* Reset margin */
+		}
+
+		button {
+			padding: 10px 20px;
+			background-color: #28a745; /* A matching green */
+			border: 1px solid #ccc; /* Match input field border */
+			border-left: none; /* Remove left border to blend with input field */
+			border-top-right-radius: 5px;
+			border-bottom-right-radius: 5px;
+			color: white;
+			cursor: pointer;
+			transition: background-color 0.3s;
+		}
+
+		button:hover {
+			background-color: #218838; /* Slightly darker green on hover */
+		}
+
+		</style>
+	</head>
+	<body>
+		<div class="chat-container">
+			<h1>LPT_GPT</h1>
+			<div class="quiz-question">
+				&nbsp; 어떤 아이가 아파트 10층에 살고 있다. 맑은 날에는 엘리베이터에서 6층에서 내려서 10층까지 걸어 올라간다. 날씨가 좋지 않다면 10층에서 내려서 집에 들어간다. 어떤 상황일까?
+			</div>
+			<div id="chatWindow"></div>
+			<form class="input-group" onsubmit="sendQuestion(); return false;">
+				<textarea id="userQuestion" class="chat-input" placeholder="Enter your question here..." rows="4"></textarea>
+				<button type="submit">Submit</button>
+			</form>
+		</div>
+
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				document.getElementById('userQuestion').addEventListener('keypress', function(event) {
+					if (event.key === 'Enter') {
+						event.preventDefault();
+						sendQuestion();
+					}
+				});
+			});
+
+			function sendQuestion() {
+				var userQuestion = document.getElementById('userQuestion').value;
+				var data = JSON.stringify({"question": userQuestion});
+
+				fetch('/chat', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: data,
+				})
+					.then(response => response.json())
+					.then(data => {
+						console.log('Success:', data);
+						displayMessage(userQuestion, 'user');
+						displayMessage(data.response, 'gpt');
+						document.getElementById('userQuestion').value = '';
+					})
+					.catch((error) => {
+						console.error('Error:', error);
+					});
+			}
+
+			function displayMessage(message, sender) {
+				const messageElement = document.createElement('div');
+				messageElement.textContent = message;
+				messageElement.classList.add('message', 'message-text');
+
+				if (sender === 'gpt') {
+					messageElement.classList.add('gpt-message');
+				} else {
+					messageElement.classList.add('user-message');
+				}
+				const chatWindow = document.getElementById('chatWindow');
+				chatWindow.appendChild(messageElement);
+				messageElement.scrollIntoView({behavior: "smooth"}); // 새 메시지로 스크롤
+			}
+
+		</script>
+	</body>
+</html>
