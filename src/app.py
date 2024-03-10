@@ -14,11 +14,8 @@ def chat():
         user_question = request.json.get('question')
         if not user_question:
             return jsonify({"error": "No question provided"}), 400
-        
         response = chatGPT(user_question)
-        print("asdf asdf asdf asdf ")
-        #return jsonify({"response": response})
-        return jsonify({"response": "hi younghoc"})
+        return jsonify({"response": response})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
@@ -35,11 +32,10 @@ def chatGPT(user_question):
             temperature=0,
             max_tokens=20
         )
-        print(completion)
         return completion.choices[0].message.content
     except Exception as e:
         print(f"Error in chatGPT function: {str(e)}")
         return "Sorry, there was an error processing your request."
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=8080)
