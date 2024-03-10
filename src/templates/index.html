@@ -46,7 +46,6 @@ body {
 			display: flex;
 			flex-direction: column;
 		}
-
 		.message {
 			padding: 10px;
 			border-radius: 10px;
@@ -54,19 +53,47 @@ body {
 			word-wrap: break-word;
 			max-width: 100%;
 		}
-
 		.user-message {
 			align-self: flex-end; /* User 메시지를 오른쪽으로 정렬 */
 			background-color: #28a745; /* 고급스러운 녹색 */
 		}
-
 		.gpt-message {
 			align-self: flex-start; /* GPT 메시지를 왼쪽으로 정렬 */
 			background-color: #007BFF; /* 고급스러운 파란색 */
 		}
-
 		.message-text {
 			color: white;
+		}
+
+		.input-group {
+			display: flex;
+			width: 100%;
+		}
+
+		.chat-input {
+			flex-grow: 1;
+			border: 1px solid #ccc;
+			border-right: none; /* Remove right border where button meets input */
+			padding: 10px;
+			border-top-left-radius: 5px;
+			border-bottom-left-radius: 5px;
+			margin: 0; /* Reset margin */
+		}
+
+		button {
+			padding: 10px 20px;
+			background-color: #28a745; /* A matching green */
+			border: 1px solid #ccc; /* Match input field border */
+			border-left: none; /* Remove left border to blend with input field */
+			border-top-right-radius: 5px;
+			border-bottom-right-radius: 5px;
+			color: white;
+			cursor: pointer;
+			transition: background-color 0.3s;
+		}
+
+		button:hover {
+			background-color: #218838; /* Slightly darker green on hover */
 		}
 
 		</style>
@@ -78,8 +105,10 @@ body {
 				&nbsp; A child lives on the 10th floor of an apartment. On a sunny day, he get off the elevator on the 6th floor and walk up to the 10th floor. On a bad day, he get off the 10th floor and enter my house. Why is that?
 			</div>
 			<div id="chatWindow"></div>
-			<textarea id="userQuestion" class="chat-input" placeholder="Enter your question here..." rows="4"></textarea>
-			<button onclick="sendQuestion()">Submit</button>
+			<form class="input-group" onsubmit="sendQuestion(); return false;">
+				<textarea id="userQuestion" class="chat-input" placeholder="Enter your question here..." rows="4"></textarea>
+				<button type="submit">Submit</button>
+			</form>
 		</div>
 
 		<script>
