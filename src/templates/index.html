@@ -51,15 +51,21 @@ body {
 			border-radius: 10px;
 			margin: 5px 10px;
 			word-wrap: break-word;
-			max-width: 100%;
+			word-break: break-all;
+			white-space: pre-wrap; /* Respect whitespace and wrap text */
+			overflow-wrap: break-word; /* Break the word to prevent overflow */
+			max-width: 50%;
 		}
 		.user-message {
 			align-self: flex-end; /* User 메시지를 오른쪽으로 정렬 */
 			background-color: #28a745; /* 고급스러운 녹색 */
+			margin-left: auto; /* Push to right */
 		}
 		.gpt-message {
 			align-self: flex-start; /* GPT 메시지를 왼쪽으로 정렬 */
 			background-color: #007BFF; /* 고급스러운 파란색 */
+			margin-right: auto; /* Push to right */
+
 		}
 		.message-text {
 			color: white;
@@ -112,6 +118,15 @@ body {
 		</div>
 
 		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				document.getElementById('userQuestion').addEventListener('keypress', function(event) {
+					if (event.key === 'Enter') {
+						event.preventDefault();
+						sendQuestion();
+					}
+				});
+			});
+
 			function sendQuestion() {
 				var userQuestion = document.getElementById('userQuestion').value;
 				var data = JSON.stringify({"question": userQuestion});
@@ -126,8 +141,9 @@ body {
 					.then(response => response.json())
 					.then(data => {
 						console.log('Success:', data);
-						displayMessage('You: ' + userQuestion, 'user');
-						displayMessage('GPT: ' + data.response, 'gpt');
+						displayMessage(userQuestion, 'user');
+						displayMessage(data.response, 'gpt');
+						document.getElementById('userQuestion').value = '';
 					})
 					.catch((error) => {
 						console.error('Error:', error);
@@ -148,6 +164,7 @@ body {
 				chatWindow.appendChild(messageElement);
 				messageElement.scrollIntoView({behavior: "smooth"}); // 새 메시지로 스크롤
 			}
+
 		</script>
 	</body>
 </html>
