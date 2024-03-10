@@ -11,7 +11,9 @@ python3 app.py
 <img width="605" alt="image" src="https://github.com/Tastypotato245/LTP_GPT_Service/assets/63251068/cfca26a6-4793-4fb5-b20e-d23856715b31">
 
 ## Test page
-<img width="660" alt="image" src="https://github.com/Tastypotato245/LTP_GPT_Service/assets/63251068/a09f66e2-9568-4083-8098-a5ed7e71a010">
+<img width="692" alt="image" src="https://github.com/Tastypotato245/LTP_GPT_Service/assets/63251068/ecd670d7-ee0c-4484-ae96-c6da0c6a32d0">
+<img width="625" alt="image" src="https://github.com/Tastypotato245/LTP_GPT_Service/assets/63251068/79b26690-53c2-4c33-a317-e3b18edaf23f">
+<img width="615" alt="image" src="https://github.com/Tastypotato245/LTP_GPT_Service/assets/63251068/221cb702-2991-4592-ac66-9df5e944c3c1">
 
 
 ## TODO
