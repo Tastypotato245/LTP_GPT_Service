@@ -18,8 +18,8 @@ python3 app.py
 
 ## TODO
 - [ ] Validate that gpt never say hint about the quiz WHENEVER
-- [ ] Make Web page
+- [x] Make Web page
   - [ ] Make User Login (Google account)
   - [ ] Attach google AdSense (Advertisement Banner in My Site)
-- [ ] Make Docker Image for servicing this web site for general users
+- [x] Make Docker Image for servicing this web site for general users
 - [ ] Buy Domain Name
