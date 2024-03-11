@@ -129,6 +129,8 @@ body {
 
 			function sendQuestion() {
 				var userQuestion = document.getElementById('userQuestion').value;
+				if (userQuestion.length === 0)
+					return ;
 				var data = JSON.stringify({"question": userQuestion});
 
 				fetch('/chat', {
