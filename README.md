@@ -27,3 +27,4 @@ https://youtu.be/MfGU1U8bW5k
   - [ ] Attach google AdSense (Advertisement Banner in My Site)
 - [x] Make Docker Image for servicing this web site for general users
 - [ ] Buy Domain Name
+- [ ] Flask To FastAPI
